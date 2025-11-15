@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - HYPEX</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-top">
+            <div class="logo">
+                <a class="logo-link" href="/"><h1>HYPEX</h1></a>
+            </div>
+            <div class="search-bar">
+                <input type="search" id="search-input" placeholder="Buscar produtos..." aria-label="Buscar produtos">
+                <button type="button" id="search-button"><i class="fas fa-search"></i></button>
+            </div>
+            <nav class="user-nav">
+                <a href="/pages/auth.html" class="nav-link user-entry" id="user-entry"><i class="fas fa-user"></i> Entrar</a>
+                <a href="/pages/favorites.html" class="nav-link"><i class="fas fa-heart"></i> Favoritos</a>
+                <a href="#" class="nav-link cart-icon" id="cart-button">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                    <span class="cart-label">Carrinho</span>
+                </a>
+            </nav>
+        </div>
+
+        <nav class="categories-nav">
+            <ul>
+                <li><a href="/pages/novidades.html">NOVIDADES</a></li>
+                <li class="brands-dropdown">
+                    <button class="brands-dropdown-btn">MARCAS <i class="fas fa-chevron-down"></i></button>
+                    <div class="brands-dropdown-content">
+                        <a href="#" data-brand="lacoste">Lacoste</a>
+                        <a href="#" data-brand="louis-vuitton">Louis Vuitton</a>
+                        <a href="#" data-brand="nike">Nike</a>
+                        <a href="#" data-brand="adidas">Adidas</a>
+                        <a href="#" data-brand="emporio-armani">Emporio Armani</a>
+                        <a href="#" data-brand="zara">Zara</a>
+                        <a href="#" data-brand="chronic">Chronic</a>
+                        <a href="#" data-brand="bmw">BMW</a>
+                        <a href="#" data-brand="gucci">Gucci</a>
+                        <a href="#" data-brand="prada">Prada</a>
+                        <a href="#" data-brand="versace">Versace</a>
+                        <a href="#" data-brand="dior">Dior</a>
+                        <a href="#" data-brand="off-white">Off-White</a>
+                        <a href="#" data-brand="fendi">Fendi</a>
+                        <a href="#" data-brand="burberry">Burberry</a>
+                        <a href="#" data-brand="givenchy">Givenchy</a>
+                        <a href="#" data-brand="supreme">Supreme</a>
+                        <a href="#" data-brand="puma">Puma</a>
+                        <a href="#" data-brand="balenciaga">Balenciaga</a>
+                        <a href="#" data-brand="tommy-hilfiger">Tommy Hilfiger</a>
+                        <a href="#" data-brand="calvin-klein">Calvin Klein</a>
+                        <a href="#" data-brand="dolce-gabbana">Dolce & Gabbana</a>
+                        <a href="#" data-brand="jordan">Jordan</a>
+                        <a href="#" data-brand="hermes">Hermès</a>
+                        <a href="#" data-brand="diesel">Diesel</a>
+                        <a href="#" data-brand="vans">Vans</a>
+                        <a href="#" data-brand="new-balance">New Balance</a>
+                        <a href="#" data-brand="under-armour">Under Armour</a>
+                        <a href="#" data-brand="ralph-lauren">Ralph Lauren</a>
+                    </div>
+                </li>
+                <li><a href="/pages/ofertas.html">OFERTAS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="login">Login</button>
+                <button class="tab-btn" data-tab="register">Cadastro</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active">
+                <h2>Entrar na HYPEX</h2>
+                <div class="form-group">
+                    <input type="email" id="login-email" required placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" required placeholder="Senha">
+                </div>
+                <button type="submit" class="auth-btn">Entrar</button>
+                <div class="auth-links">
+                    <a href="#reset-password">Esqueceu a senha?</a>
+                </div>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form">
+                <h2>Criar Conta</h2>
+                <div class="form-group">
+                    <input type="text" id="register-name" required placeholder="Nome completo">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="register-email" required placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="register-password" required placeholder="Senha">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="register-confirm" required placeholder="Confirmar senha">
+                </div>
+                <button type="submit" class="auth-btn">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/user.js"></script>
+    <script src="/js/brands.js"></script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

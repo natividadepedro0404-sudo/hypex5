@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HYPEX — Sua loja de moda</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="announcement-bar">
+    <p>Frete grátis em compras acima de R$ 199</p>
+  </div>
+
+  <header class="site-header">
+    <div class="header-top">
+      <div class="logo">
+        <a class="logo-link" href="/"><h1>HYPEX</h1></a>
+      </div>
+      <div class="search-bar">
+        <input type="search" id="search-input" placeholder="Buscar produtos..." aria-label="Buscar produtos">
+        <button type="button" id="search-button"><i class="fas fa-search"></i></button>
+      </div>
+      <nav class="user-nav">
+        <a href="/pages/auth.html" class="nav-link user-entry" id="user-entry"><i class="fas fa-user"></i> Entrar</a>
+        <a href="/pages/favorites.html" class="nav-link"><i class="fas fa-heart"></i> Favoritos</a>
+        <a href="#" class="nav-link cart-icon" id="cart-button">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+          <span class="cart-label">Carrinho</span>
+        </a>
+      </nav>
+    </div>
+
+    <nav class="categories-nav">
+      <ul>
+        <li><a href="/pages/novidades.html">NOVIDADES</a></li>
+        <li class="brands-dropdown">
+          <button class="brands-dropdown-btn">MARCAS <i class="fas fa-chevron-down"></i></button>
+          <div class="brands-dropdown-content">
+            <a href="#" data-brand="lacoste">Lacoste</a>
+            <a href="#" data-brand="louis-vuitton">Louis Vuitton</a>
+            <a href="#" data-brand="nike">Nike</a>
+            <a href="#" data-brand="adidas">Adidas</a>
+            <a href="#" data-brand="emporio-armani">Emporio Armani</a>
+            <a href="#" data-brand="zara">Zara</a>
+            <a href="#" data-brand="chronic">Chronic</a>
+            <a href="#" data-brand="bmw">BMW</a>
+            <a href="#" data-brand="gucci">Gucci</a>
+            <a href="#" data-brand="prada">Prada</a>
+            <a href="#" data-brand="versace">Versace</a>
+            <a href="#" data-brand="dior">Dior</a>
+            <a href="#" data-brand="off-white">Off-White</a>
+            <a href="#" data-brand="fendi">Fendi</a>
+            <a href="#" data-brand="burberry">Burberry</a>
+            <a href="#" data-brand="givenchy">Givenchy</a>
+            <a href="#" data-brand="supreme">Supreme</a>
+            <a href="#" data-brand="puma">Puma</a>
+            <a href="#" data-brand="balenciaga">Balenciaga</a>
+            <a href="#" data-brand="tommy-hilfiger">Tommy Hilfiger</a>
+            <a href="#" data-brand="calvin-klein">Calvin Klein</a>
+            <a href="#" data-brand="dolce-gabbana">Dolce & Gabbana</a>
+            <a href="#" data-brand="jordan">Jordan</a>
+            <a href="#" data-brand="hermes">Hermès</a>
+            <a href="#" data-brand="diesel">Diesel</a>
+            <a href="#" data-brand="vans">Vans</a>
+            <a href="#" data-brand="new-balance">New Balance</a>
+            <a href="#" data-brand="under-armour">Under Armour</a>
+            <a href="#" data-brand="ralph-lauren">Ralph Lauren</a>
+          </div>
+        </li>
+        <li><a href="/pages/ofertas.html">OFERTAS</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+
+  <main>
+    <section id="produtos" aria-labelledby="produtos-title">
+      <div class="section-header">
+        <h2 id="produtos-title" style="color: white;">TENDENCIAS</h2>
+        <div class="filters">
+          <select aria-label="Ordenar por">
+            <option>Mais Vendidos</option>
+            <option>Menor Preço</option>
+            <option>Maior Preço</option>
+            <option>Mais Recentes</option>
+          </select>
+        </div>
+      </div>
+      <div id="product-list" class="products-grid"></div>
+    </section>
+
+    <div id="cart-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Seu Carrinho</h3>
+          <button class="close-modal">&times;</button>
+        </div>
+        <div id="cart-items"></div>
+        <div class="cart-footer">
+          <div class="coupon-section" style="padding: 1rem; border-top: 1px solid #eee; margin-bottom: 1rem;">
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <input type="text" id="coupon-code-input" placeholder="Código do cupom" 
+                style="flex: 1; padding: 0.5rem; /* Efeito acrílico */ background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: 1px solid rgba(224, 224, 224, 0.5); border-radius: 6px; color: var(--text-primary); /* Fallback para navegadores que não suportam backdrop-filter */ @supports not (backdrop-filter: blur(5px)) { background: rgba(255, 255, 255, 0.9); } isolation: isolate; filter: none !important; -webkit-filter: none !important;">
+              <button type="button" id="apply-coupon-btn" class="btn btn-outline" 
+                style="padding: 0.5rem 1rem; white-space: nowrap;">
+                Aplicar
+              </button>
+            </div>
+            <div id="coupon-message" style="font-size: 0.875rem; min-height: 1.5rem;"></div>
+          </div>
+          <div class="shipping-section" style="padding: 1rem; border-top: 1px solid #eee; margin-bottom: 1rem;">
+            <h4 style="margin: 0 0 1rem 0; font-size: 1rem;">Opções de Recebimento</h4>
+            
+            <!-- Opção 1: CEP (Correios/Melhor Envio) -->
+            <label style="display: block; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 0.5rem; cursor: pointer;">
+              <input type="radio" name="delivery-option" value="cep" checked style="margin-right: 0.5rem;">
+              <strong>Entrega via Correios/Transportadora</strong>
+            </label>
+            <div id="cep-section" style="padding: 0.75rem; background: #f9f9f9; border-radius: 4px; margin-bottom: 0.75rem;">
+              <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <input type="text" id="shipping-cep-input" placeholder="Digite seu CEP" maxlength="8" inputmode="numeric" pattern="[0-9]*"
+                  style="flex: 1; padding: 0.5rem; /* Efeito acrílico */ background: rgba(255, 255, 255, 0.25); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: 1px solid rgba(224, 224, 224, 0.5); border-radius: 6px; color: var(--text-primary); /* Fallback para navegadores que não suportam backdrop-filter */ @supports not (backdrop-filter: blur(5px)) { background: rgba(255, 255, 255, 0.9); } isolation: isolate; filter: none !important; -webkit-filter: none !important;">
+                <button type="button" id="calc-shipping-btn" class="btn btn-outline"
+                  style="padding: 0.5rem 1rem; white-space: nowrap;">Calcular Frete</button>
+              </div>
+              <div id="shipping-results" style="font-size: 0.9rem; color: var(--text-secondary); min-height: 1.25rem;"></div>
+            </div>
+            
+            <!-- Opção 2: Retirada no Local -->
+            <label style="display: block; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 0.5rem; cursor: pointer;">
+              <input type="radio" name="delivery-option" value="pickup" style="margin-right: 0.5rem;">
+              <strong>Retirada no Local (Grátis)</strong>
+            </label>
+            <div id="pickup-section" style="display: none; padding: 0.75rem; background: #f0f8ff; border-radius: 4px; margin-bottom: 0.75rem; border-left: 3px solid #007bff;">
+              <p style="margin: 0 0 0.5rem 0; font-size: 0.9rem;">🛑️ Retirar seu pedido pessoalmente no endereço abaixo:</p>
+              <p style="margin: 0 0 0.25rem 0; font-size: 0.9rem;"><strong>📍 Rua Camboja, nº 133 – Bairro Petrovale, Betim</strong></p>
+              <p style="margin: 0; font-size: 0.9rem;">📞 Telefone: (31) 97507-4666</p>
+            </div>
+            
+            <!-- Opção 3: Moto-Uber -->
+            <label style="display: block; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 0.5rem; cursor: pointer;">
+              <input type="radio" name="delivery-option" value="moto-uber" style="margin-right: 0.5rem;">
+              <strong>Entrega via Moto/Uber (A combinar)</strong>
+            </label>
+            <div id="moto-uber-section" style="display: none; padding: 0.75rem; background: #fff8e1; border-radius: 4px; margin-bottom: 0.75rem; border-left: 3px solid #ffc107;">
+              <p style="margin: 0 0 0.5rem 0; font-size: 0.9rem;">📦 Entregamos por moto-Uber, com o valor a combinar diretamente pelo WhatsApp.</p>
+              <p style="margin: 0; font-size: 0.9rem;"><strong>📲 Contato: (31) 97507-4666</strong></p>
+            </div>
+          </div>
+          <div class="cart-total" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <span>Subtotal:</span>
+            <strong id="cart-subtotal-value">R$ 0,00</strong>
+          </div>
+          <div id="shipping-total" style="display: none; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.95rem;">
+            <span>Frete:</span>
+            <strong id="shipping-total-value">R$ 0,00</strong>
+          </div>
+          <div id="coupon-discount" style="display: none; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; color: #28a745; font-size: 0.9rem;">
+            <span>Desconto:</span>
+            <strong id="coupon-discount-value">-R$ 0,00</strong>
+          </div>
+          <div class="cart-total" style="display: flex; justify-content: space-between; align-items: center; font-size: 1.2rem; font-weight: bold; padding-top: 0.5rem; border-top: 2px solid #333; margin-bottom: 1rem;">
+            <span>Total:</span>
+            <strong id="cart-total-value">R$ 0,00</strong>
+          </div>
+          <button type="button" id="checkout-btn" class="checkout-button">
+            Finalizar Compra
+            <small>(apenas itens selecionados)</small>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Atendimento</h4>
+        <ul>
+          <li><a href="/pages/faq.html">FAQ</a></li>
+          <li><a href="/pages/contato.html">Contato</a></li>
+          <li><a href="/pages/envio.html">Envio</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Sobre</h4>
+        <ul>
+          <li><a href="/pages/sobre.html">Quem Somos</a></li>
+          <li><a href="/pages/termos.html">Termos</a></li>
+          <li><a href="/pages/privacidade.html">Privacidade</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Redes Sociais</h4>
+        <div class="social-links">
+          <a href="https://www.instagram.com/hypex.ytt?igsh=Ym1mcjZoYmZyajJh&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@hypex.ytt?_r=1&_t=ZS-91JuQbM4gsi" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 HYPEX. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="/js/user.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/brands.js"></script>
+</body>
+</html>

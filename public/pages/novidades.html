@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novidades - HYPEX</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/category.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="announcement-bar">
+        <p>Frete grátis em compras acima de R$ 199</p>
+    </div>
+
+    <header class="site-header">
+        <div class="header-top">
+            <div class="logo">
+                <a class="logo-link" href="/"><h1>HYPEX</h1></a>
+            </div>
+            <div class="search-bar">
+                <input type="search" id="search-input" placeholder="Buscar produtos..." aria-label="Buscar produtos">
+                <button type="button" id="search-button"><i class="fas fa-search"></i></button>
+            </div>
+            <nav class="user-nav">
+                <a href="/pages/auth.html" class="nav-link user-entry" id="user-entry"><i class="fas fa-user"></i> Entrar</a>
+                <a href="/pages/favorites.html" class="nav-link"><i class="fas fa-heart"></i> Favoritos</a>
+                <a href="#" class="nav-link cart-icon" id="cart-button">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                    <span class="cart-label">Carrinho</span>
+                </a>
+            </nav>
+        </div>
+
+        <nav class="categories-nav">
+            <ul>
+                <li><a href="/pages/novidades.html">NOVIDADES</a></li>
+                <li class="brands-dropdown">
+                    <button class="brands-dropdown-btn">MARCAS <i class="fas fa-chevron-down"></i></button>
+                    <div class="brands-dropdown-content">
+                        <a href="#" data-brand="lacoste">Lacoste</a>
+                        <a href="#" data-brand="louis-vuitton">Louis Vuitton</a>
+                        <a href="#" data-brand="nike">Nike</a>
+                        <a href="#" data-brand="adidas">Adidas</a>
+                        <a href="#" data-brand="emporio-armani">Emporio Armani</a>
+                        <a href="#" data-brand="zara">Zara</a>
+                        <a href="#" data-brand="chronic">Chronic</a>
+                        <a href="#" data-brand="bmw">BMW</a>
+                        <a href="#" data-brand="gucci">Gucci</a>
+                        <a href="#" data-brand="prada">Prada</a>
+                        <a href="#" data-brand="versace">Versace</a>
+                        <a href="#" data-brand="dior">Dior</a>
+                        <a href="#" data-brand="off-white">Off-White</a>
+                        <a href="#" data-brand="fendi">Fendi</a>
+                        <a href="#" data-brand="burberry">Burberry</a>
+                        <a href="#" data-brand="givenchy">Givenchy</a>
+                        <a href="#" data-brand="supreme">Supreme</a>
+                        <a href="#" data-brand="puma">Puma</a>
+                        <a href="#" data-brand="balenciaga">Balenciaga</a>
+                        <a href="#" data-brand="tommy-hilfiger">Tommy Hilfiger</a>
+                        <a href="#" data-brand="calvin-klein">Calvin Klein</a>
+                        <a href="#" data-brand="dolce-gabbana">Dolce & Gabbana</a>
+                        <a href="#" data-brand="jordan">Jordan</a>
+                        <a href="#" data-brand="hermes">Hermès</a>
+                        <a href="#" data-brand="diesel">Diesel</a>
+                        <a href="#" data-brand="vans">Vans</a>
+                        <a href="#" data-brand="new-balance">New Balance</a>
+                        <a href="#" data-brand="under-armour">Under Armour</a>
+                        <a href="#" data-brand="ralph-lauren">Ralph Lauren</a>
+                    </div>
+                </li>
+                <li><a href="/pages/ofertas.html">OFERTAS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="category-header">
+            <h1 id="category-title">Novidades</h1>
+            
+            <div class="category-filters">
+                <div class="filter-group">
+                    <label for="sort">Ordenar por:</label>
+                    <select id="sort">
+                        <option value="newest">Mais Recentes</option>
+                        <option value="price_asc">Menor Preço</option>
+                        <option value="price_desc">Maior Preço</option>
+                        <option value="discount">Maior Desconto</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="price_range">Faixa de Preço:</label>
+                    <select id="price_range">
+                        <option value="all">Todos</option>
+                        <option value="0-50">Até R$ 50</option>
+                        <option value="50-100">R$ 50 - R$ 100</option>
+                        <option value="100-200">R$ 100 - R$ 200</option>
+                        <option value="200+">Acima de R$ 200</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-content">
+            <aside class="category-sidebar">
+                <div class="filter-section">
+                    <h3>Filtros</h3>
+                    
+                    <!-- Dropdown para Tamanhos -->
+                    <div class="filter-group dropdown-filter">
+                        <h4>Tamanhos</h4>
+                        <div class="dropdown">
+                            <button class="dropdown-btn" type="button">
+                                Selecione os tamanhos <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <div class="checkbox-group">
+                                    <label><input type="checkbox" value="PP"> PP</label>
+                                    <label><input type="checkbox" value="P"> P</label>
+                                    <label><input type="checkbox" value="M"> M</label>
+                                    <label><input type="checkbox" value="G"> G</label>
+                                    <label><input type="checkbox" value="GG"> GG</label>
+                                    <label><input type="checkbox" value="G1"> G1</label>
+                                    <label><input type="checkbox" value="G2"> G2</label>
+                                    <label><input type="checkbox" value="G3"> G3</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dropdown para Tipos -->
+                    <div class="filter-group dropdown-filter">
+                        <h4>Tipos</h4>
+                        <div class="dropdown">
+                            <button class="dropdown-btn" type="button">
+                                Selecione os tipos <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <div class="checkbox-group">
+                                    <label><input type="checkbox" value="camisa"> Camisa</label>
+                                    <label><input type="checkbox" value="moleton"> Moleton</label>
+                                    <label><input type="checkbox" value="vestido"> Vestido</label>
+                                    <label><input type="checkbox" value="sapato"> Sapato</label>
+                                    <label><input type="checkbox" value="calca"> Calça</label>
+                                    <label><input type="checkbox" value="calca-normal"> Calça Normal</label>
+                                    <label><input type="checkbox" value="calca-jogador"> Calça Jogador</label>
+                                    <label><input type="checkbox" value="bermuda-jeans"> Bermuda Jeans</label>
+                                    <label><input type="checkbox" value="bermuda-jogador"> Bermuda Jogador</label>
+                                    <label><input type="checkbox" value="bermuda-tectel"> Bermuda Tectel</label>
+                                    <label><input type="checkbox" value="bermuda-elastano"> Bermuda Elastano</label>
+                                    <label><input type="checkbox" value="blusa-times"> Blusa de Times</label>
+                                    <label><input type="checkbox" value="conjunto"> Conjunto</label>
+                                    <label><input type="checkbox" value="kit"> Sugestões de Kit</label>
+                                    <label><input type="checkbox" value="bone"> Boné</label>
+                                    <label><input type="checkbox" value="acessorio"> Acessório</label>
+                                    <label><input type="checkbox" value="short"> Short</label>
+                                    <label><input type="checkbox" value="camiseta"> Camiseta</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dropdown para Cores -->
+                    <div class="filter-group dropdown-filter">
+                        <h4>Cores</h4>
+                        <div class="dropdown">
+                            <button class="dropdown-btn" type="button">
+                                Selecione as cores <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <div class="color-filters">
+                                    <label class="color-option">
+                                        <input type="checkbox" value="black">
+                                        <span class="color-circle" style="background: black;"></span>
+                                    </label>
+                                    <label class="color-option">
+                                        <input type="checkbox" value="white">
+                                        <span class="color-circle" style="background: white;"></span>
+                                    </label>
+                                    <label class="color-option">
+                                        <input type="checkbox" value="gray">
+                                        <span class="color-circle" style="background: gray;"></span>
+                                    </label>
+                                    <label class="color-option">
+                                        <input type="checkbox" value="blue">
+                                        <span class="color-circle" style="background: blue;"></span>
+                                    </label>
+                                    <label class="color-option">
+                                        <input type="checkbox" value="red">
+                                        <span class="color-circle" style="background: red;"></span>
+                                    </label>
+                                    <label class="color-option">
+                                        <input type="checkbox" value="green">
+                                        <span class="color-circle" style="background: green;"></span>
+                                    </label>
+                                    <label class="color-option">
+                                        <input type="checkbox" value="yellow">
+                                        <span class="color-circle" style="background: yellow;"></span>
+                                    </label>
+                                    <label class="color-option">
+                                        <input type="checkbox" value="others">
+                                        <span class="color-circle outros" style="background: #808080;">OUTROS</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="category-products">
+                <div id="products-grid" class="products-grid">
+                    <!-- Produtos serão inseridos aqui -->
+                </div>
+                
+                <div class="pagination">
+                    <button class="prev-page" disabled><i class="fas fa-chevron-left"></i></button>
+                    <span class="current-page">Página 1 de 1</span>
+                    <button class="next-page" disabled><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="cart-modal" class="modal">
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Atendimento</h4>
+                <ul>
+                    <li><a href="/pages/faq.html">FAQ</a></li>
+                    <li><a href="/pages/contato.html">Contato</a></li>
+                    <li><a href="/pages/envio.html">Envio</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Sobre</h4>
+                <ul>
+                    <li><a href="/pages/sobre.html">Quem Somos</a></li>
+                    <li><a href="/pages/termos.html">Termos</a></li>
+                    <li><a href="/pages/privacidade.html">Privacidade</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Redes Sociais</h4>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/hypex.ytt?igsh=Ym1mcjZoYmZyajJh&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@hypex.ytt?_r=1&_t=ZS-91JuQbM4gsi"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 HYPEX. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="/js/user.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/brands.js"></script>
+    <script src="/js/category.js"></script>
+    <script src="/js/filters.js"></script>
+</body>
+</html>

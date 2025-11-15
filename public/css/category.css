@@ -1,0 +1,710 @@
+/* Estilos específicos para páginas de categoria */
+
+.category-header {
+    padding: 2rem;
+    /* Efeito acrílico */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(224, 224, 224, 0.5);
+    margin-bottom: 2rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(10px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.category-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.category-filters {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.filter-group label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.filter-group select {
+    padding: 0.75rem 1rem;
+    /* Efeito acrílico */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(224, 224, 224, 0.5);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 150px;
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(5px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.filter-group select:hover {
+    border-color: var(--primary);
+}
+
+.filter-group select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255, 66, 66, 0.1);
+}
+
+.category-content {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    padding: 0 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.category-sidebar {
+    /* Efeito acrílico */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 1px solid rgba(224, 224, 224, 0.5);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(10px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.filter-section h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--gray-200);
+}
+
+.filter-section .filter-group {
+    margin-bottom: 1.5rem;
+}
+
+.filter-section h4 {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Dropdown filters */
+.dropdown-filter {
+    margin-bottom: 1.5rem;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.dropdown-btn {
+    /* Efeito acrílico */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: var(--text-primary);
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    border: 1px solid rgba(224, 224, 224, 0.5);
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(5px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.dropdown-btn:hover {
+    border-color: var(--primary);
+}
+
+.dropdown-btn i {
+    transition: transform 0.2s ease;
+}
+
+.dropdown.active .dropdown-btn i {
+    transform: rotate(180deg);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    /* Efeito acrílico */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    min-width: 100%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: 1px solid rgba(224, 224, 224, 0.5);
+    border-radius: 6px;
+    z-index: 1000;
+    margin-top: 0.5rem;
+    padding: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(10px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+.dropdown-content .checkbox-group,
+.dropdown-content .color-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.dropdown-content .color-filters {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.dropdown-content .checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    font-size: 0.9rem;
+    /* Efeito acrílico */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(5px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.dropdown-content .checkbox-group label:hover {
+    background-color: var(--gray-100);
+}
+
+.dropdown-content .checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+
+.color-filters {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.color-option {
+    position: relative;
+    display: inline-block;
+}
+
+.color-option input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.color-circle {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    /* Efeito acrílico */
+    border: 3px solid rgba(224, 224, 224, 0.5);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(5px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.color-option:hover .color-circle {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.color-option input[type="checkbox"]:checked + .color-circle {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+}
+
+/* Special styling for the "OUTROS" option */
+.color-option .color-circle.outros {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 32px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    /* Efeito acrílico */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 3px solid rgba(224, 224, 224, 0.5);
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(5px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.category-products {
+    /* Efeito acrílico */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 1px solid rgba(224, 224, 224, 0.5);
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(10px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.product-card {
+    /* Efeito acrílico */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid rgba(224, 224, 224, 0.5);
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(10px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
+
+.product-card .product-image {
+    position: relative;
+    overflow: hidden;
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.product-card .product-image img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    max-width: 100%;
+    height: auto;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+/* Placeholder styling for products without images */
+.product-card .product-image.placeholder {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-card .product-info {
+    padding: 1rem;
+    /* Efeito acrílico */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 5px;
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(5px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.product-card .product-info h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.product-card .product-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.product-card .current-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.product-card .original-price {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-decoration: line-through;
+}
+
+.product-card .discount-badge {
+    background: var(--accent);
+    color: var(--secondary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.product-card .product-brand,
+.product-card .product-type,
+.product-card .product-color {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 0.25rem 0;
+}
+
+.product-card .product-brand {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.product-card .product-sizes {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+/* Variações badge */
+.variations-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--accent);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    z-index: 2;
+}
+
+.product-card .size-tag {
+    background: var(--gray-100);
+    color: var(--text-primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid var(--gray-300);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    /* Efeito acrílico */
+    border-top: 1px solid rgba(224, 224, 224, 0.5);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 1rem;
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(10px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.pagination button {
+    /* Efeito acrílico */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(224, 224, 224, 0.5);
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(5px)) {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: var(--primary);
+    color: var(--secondary);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    /* Efeito acrílico */
+    background: rgba(245, 245, 245, 0.25);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    /* Fallback para navegadores que não suportam backdrop-filter */
+    @supports not (backdrop-filter: blur(5px)) {
+      background: rgba(245, 245, 245, 0.9);
+    }
+    isolation: isolate;
+    filter: none !important;
+    -webkit-filter: none !important;
+}
+
+.pagination .current-page {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.loading, .no-products, .error-message {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.no-products {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .category-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .category-sidebar {
+        order: 2;
+        padding: 1rem;
+    }
+    
+    .category-products {
+        order: 1;
+        padding: 1rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+    
+    .category-header {
+        padding: 1rem;
+    }
+    
+    .category-header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-content {
+        padding: 0 0.5rem;
+    }
+    
+    .category-sidebar {
+        padding: 0.75rem;
+    }
+    
+    .category-products {
+        padding: 0.75rem;
+    }
+    
+    .category-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group select {
+        min-width: 100%;
+    }
+    
+    .checkbox-group {
+        gap: 0.5rem;
+    }
+    
+    .checkbox-group label {
+        padding: 0.25rem;
+        font-size: 0.8rem;
+    }
+    
+    .color-filters {
+        gap: 0.5rem;
+    }
+    
+    .color-circle {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .color-option .color-circle.outros {
+        width: 50px;
+        height: 24px;
+        font-size: 0.6rem;
+    }
+    
+    /* Responsividade para dropdowns */
+    .dropdown-btn {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .dropdown-content {
+        padding: 0.5rem;
+        max-height: 200px;
+    }
+    
+    .dropdown-content .checkbox-group label {
+        padding: 0.1rem;
+        font-size: 0.8rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 0.75rem;
+    }
+    
+    .pagination {
+        gap: 0.5rem;
+    }
+    
+    .pagination button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+}

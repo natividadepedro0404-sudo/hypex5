@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pagamento PIX - HYPEX</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .payment-container {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .payment-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .payment-header h1 {
+      font-size: 1.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .qrcode-container {
+      text-align: center;
+      margin: 2rem 0;
+      padding: 2rem;
+      background: var(--gray-100);
+      border-radius: 8px;
+    }
+    .qrcode-container img {
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      border: 4px solid white;
+      border-radius: 8px;
+    }
+    .qrcode-text {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: white;
+      border: 1px solid var(--gray-300);
+      border-radius: 8px;
+      word-break: break-all;
+      font-family: monospace;
+      font-size: 0.875rem;
+      position: relative;
+    }
+    .copy-btn {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: var(--secondary);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover {
+      background: #333;
+    }
+    .copy-btn.copied {
+      background: #28a745;
+    }
+    .payment-info {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: var(--gray-100);
+      border-radius: 8px;
+    }
+    .payment-info-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .payment-info-item:last-child {
+      border-bottom: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .status-indicator {
+      text-align: center;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+    }
+    .status-indicator.pending {
+      background: #fff3cd;
+      color: #856404;
+    }
+    .status-indicator.paid {
+      background: #d4edda;
+      color: #155724;
+    }
+    .status-indicator.expired {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(0,0,0,0.1);
+      border-radius: 50%;
+      border-top-color: var(--primary);
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 0.5rem;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-top">
+      <div class="logo">
+        <a class="logo-link" href="/"><h1>HYPEX</h1></a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="payment-container">
+      <div class="payment-header">
+        <h1>Pagamento PIX</h1>
+        <p>Escaneie o QR Code ou copie o código para pagar</p>
+      </div>
+
+      <div id="status-indicator" class="status-indicator pending">
+        <i class="fas fa-clock"></i> Aguardando pagamento...
+      </div>
+
+      <div class="qrcode-container" id="qrcode-container">
+        <div id="qrcode-loading" style="text-align: center; padding: 2rem;">
+          <div class="loading-spinner"></div>
+          <p>Carregando QR Code...</p>
+        </div>
+        <img id="qrcode-image" style="display: none;" alt="QR Code PIX">
+        <div id="qrcode-text" class="qrcode-text" style="display: none;"></div>
+        <button id="copy-btn" class="copy-btn" style="display: none;">
+          <i class="fas fa-copy"></i> Copiar código PIX
+        </button>
+      </div>
+
+      <div class="payment-info" id="payment-info" style="display: none;">
+        <div class="payment-info-item">
+          <span>Subtotal:</span>
+          <span id="subtotal-value">R$ 0,00</span>
+        </div>
+        <div class="payment-info-item" id="discount-row" style="display: none;">
+          <span>Desconto:</span>
+          <span id="discount-value" style="color: #28a745;">-R$ 0,00</span>
+        </div>
+        <div class="payment-info-item">
+          <span>Total:</span>
+          <span id="total-value">R$ 0,00</span>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <p style="color: var(--text-secondary); font-size: 0.875rem;">
+          O pagamento será confirmado automaticamente após a transação.
+        </p>
+        <p style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 0.5rem;">
+          Esta página atualiza automaticamente.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Obter dados da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    let pendingOrderId = urlParams.get('pending_order_id');
+    const paymentData = urlParams.get('payment_data');
+
+    let paymentInfo = null;
+    let orderSummary = null;
+    let statusCheckInterval = null;
+
+    // Parse payment data se veio na URL
+    if (paymentData) {
+      try {
+        const data = JSON.parse(decodeURIComponent(paymentData));
+        paymentInfo = data.payment;
+        orderSummary = data.order_summary;
+      } catch (e) {
+        console.error('Erro ao parsear dados de pagamento:', e);
+      }
+    }
+
+    // Se não tem dados, buscar do localStorage
+    if (!paymentInfo || !pendingOrderId) {
+      const savedData = localStorage.getItem('hypex_pending_payment');
+      if (savedData) {
+        try {
+          const data = JSON.parse(savedData);
+          if (!paymentInfo) paymentInfo = data.payment;
+          if (!orderSummary) orderSummary = data.order_summary;
+          if (data.pending_order_id && !pendingOrderId) {
+            pendingOrderId = data.pending_order_id;
+            window.history.replaceState({}, '', `?pending_order_id=${pendingOrderId}`);
+          }
+        } catch (e) {
+          console.error('Erro ao carregar dados salvos:', e);
+        }
+      }
+    }
+
+    // Exibir QR Code
+    function displayQRCode() {
+      if (!paymentInfo) {
+        console.error('Payment info não encontrado');
+        console.log('URL params:', { pendingOrderId, paymentData });
+        console.log('localStorage:', localStorage.getItem('hypex_pending_payment'));
+        document.getElementById('qrcode-loading').innerHTML = '<p style="color: #dc3545;">Erro: Dados de pagamento não encontrados. Por favor, tente novamente.</p>';
+        return;
+      }
+
+      console.log('Payment info carregado:', paymentInfo);
+      console.log('Order summary:', orderSummary);
+
+      const qrcodeImage = document.getElementById('qrcode-image');
+      const qrcodeText = document.getElementById('qrcode-text');
+      const copyBtn = document.getElementById('copy-btn');
+      const loading = document.getElementById('qrcode-loading');
+
+      console.log('Exibindo QR code. paymentInfo:', paymentInfo);
+      
+      // Se temos QR code, exibir
+      if (paymentInfo.qrcode) {
+        console.log('QR code encontrado:', paymentInfo.qrcode.substring(0, 50) + '...');
+        qrcodeText.textContent = paymentInfo.qrcode;
+        qrcodeText.style.display = 'block';
+        copyBtn.style.display = 'block';
+        
+        // Se temos imagem do QR code, exibir
+        if (paymentInfo.qrcode_image) {
+          console.log('Imagem do QR code encontrada:', paymentInfo.qrcode_image);
+          qrcodeImage.src = paymentInfo.qrcode_image;
+          qrcodeImage.style.display = 'block';
+          qrcodeImage.onload = function() {
+            console.log('Imagem do QR code carregada com sucesso');
+            loading.style.display = 'none';
+          };
+          qrcodeImage.onerror = function() {
+            // Se a imagem falhar ao carregar, gerar QR code usando API externa
+            console.log('Imagem do QR code falhou, gerando nova...');
+            if (paymentInfo.qrcode) {
+              const newImageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(paymentInfo.qrcode)}`;
+              qrcodeImage.src = newImageUrl;
+              console.log('Nova URL da imagem:', newImageUrl);
+            }
+          };
+        } else if (paymentInfo.qrcode) {
+          // Se não temos imagem mas temos código, gerar QR code
+          console.log('Gerando imagem do QR code...');
+          const imageUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(paymentInfo.qrcode)}`;
+          qrcodeImage.src = imageUrl;
+          qrcodeImage.style.display = 'block';
+          qrcodeImage.onload = function() {
+            console.log('Imagem do QR code gerada e carregada');
+            loading.style.display = 'none';
+          };
+          qrcodeImage.onerror = function() {
+            console.error('Erro ao gerar imagem do QR code');
+            loading.innerHTML = '<p style="color: #dc3545;">Erro ao gerar imagem do QR Code. O código PIX está disponível abaixo.</p>';
+          };
+        }
+        
+        // Garantir que o loading seja escondido mesmo se a imagem não carregar
+        setTimeout(() => {
+          if (loading && loading.style.display !== 'none') {
+            console.log('Escondendo loading após timeout');
+            loading.style.display = 'none';
+          }
+        }, 3000);
+      } else {
+        // Se não temos QR code, mostrar erro
+        console.error('QR code não encontrado em paymentInfo');
+        console.error('paymentInfo completo:', paymentInfo);
+        loading.innerHTML = '<p style="color: #dc3545;">Erro: QR Code não foi gerado. Por favor, tente novamente.</p>';
+      }
+
+      // Exibir informações do pedido
+      if (orderSummary) {
+        document.getElementById('payment-info').style.display = 'block';
+        document.getElementById('subtotal-value').textContent = `R$ ${orderSummary.subtotal.toFixed(2)}`;
+        document.getElementById('total-value').textContent = `R$ ${orderSummary.total.toFixed(2)}`;
+        
+        if (orderSummary.discount > 0) {
+          document.getElementById('discount-row').style.display = 'flex';
+          document.getElementById('discount-value').textContent = `-R$ ${orderSummary.discount.toFixed(2)}`;
+        }
+      }
+    }
+
+    // Copiar código PIX
+    document.getElementById('copy-btn').addEventListener('click', () => {
+      const qrcodeText = document.getElementById('qrcode-text').textContent;
+      navigator.clipboard.writeText(qrcodeText).then(() => {
+        const btn = document.getElementById('copy-btn');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Código copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    });
+
+    // Verificar status do pagamento
+    async function checkPaymentStatus() {
+      if (!pendingOrderId) return;
+
+      const token = localStorage.getItem('hypex_token');
+      if (!token) {
+        console.error('Token não encontrado');
+        return;
+      }
+
+      try {
+        const res = await fetch(`/api/orders/pending/${pendingOrderId}/status`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const data = await res.json();
+
+        if (data.status === 'paid') {
+          // Pagamento confirmado!
+          const statusIndicator = document.getElementById('status-indicator');
+          statusIndicator.className = 'status-indicator paid';
+          statusIndicator.innerHTML = '<i class="fas fa-check-circle"></i> Pagamento confirmado! Redirecionando...';
+
+          // Parar verificação
+          if (statusCheckInterval) {
+            clearInterval(statusCheckInterval);
+          }
+
+          // Verificar tipo de entrega salvo
+          const savedData = localStorage.getItem('hypex_pending_payment');
+          let deliveryType = 'cep'; // Padrão
+          if (savedData) {
+            try {
+              const parsedData = JSON.parse(savedData);
+              deliveryType = parsedData.delivery_type || 'cep';
+            } catch (e) {
+              console.error('Erro ao parsear dados salvos:', e);
+            }
+          }
+
+          // Limpar dados salvos
+          localStorage.removeItem('hypex_pending_payment');
+
+          // Redirecionar após 2 segundos
+          setTimeout(() => {
+            // Se for pickup ou moto-uber, redirecionar para página de confirmação
+            if (deliveryType === 'pickup' || deliveryType === 'moto-uber') {
+              window.location.href = `/pages/order-confirmation.html?pending_order_id=${pendingOrderId}&type=${deliveryType}`;
+            } else {
+              // Para CEP, redirecionar para perfil
+              window.location.href = '/pages/profile.html?payment_success=true';
+            }
+          }, 2000);
+        } else if (data.status === 'expired' || data.status === 'cancelled') {
+          const statusIndicator = document.getElementById('status-indicator');
+          statusIndicator.className = 'status-indicator expired';
+          statusIndicator.innerHTML = '<i class="fas fa-times-circle"></i> Pagamento expirado ou cancelado.';
+
+          if (statusCheckInterval) {
+            clearInterval(statusCheckInterval);
+          }
+        }
+      } catch (error) {
+        console.error('Erro ao verificar status:', error);
+      }
+    }
+
+    // Se ainda não tem dados, mostrar erro antes de inicializar
+    if (!paymentInfo) {
+      console.error('Payment info não encontrado');
+      console.log('URL params:', { pendingOrderId, paymentData });
+      console.log('localStorage:', localStorage.getItem('hypex_pending_payment'));
+      document.getElementById('qrcode-loading').innerHTML = '<p style="color: #dc3545;">Erro: Dados de pagamento não encontrados. Por favor, tente novamente.</p>';
+    } else {
+      // Inicializar
+      console.log('Inicializando página de pagamento...');
+      displayQRCode();
+    }
+
+    // Verificar status a cada 3 segundos
+    if (pendingOrderId) {
+      console.log('Iniciando verificação de status do pagamento...');
+      statusCheckInterval = setInterval(checkPaymentStatus, 3000);
+      // Verificar imediatamente também
+      setTimeout(checkPaymentStatus, 1000);
+    } else {
+      console.warn('pending_order_id não encontrado. Verificação de status desabilitada.');
+    }
+    
+    // Fallback: se após 5 segundos ainda estiver carregando, tentar novamente
+    setTimeout(() => {
+      const loading = document.getElementById('qrcode-loading');
+      if (loading && loading.style.display !== 'none') {
+        console.log('Timeout: ainda carregando após 5 segundos. Tentando exibir novamente...');
+        if (paymentInfo && paymentInfo.qrcode) {
+          displayQRCode();
+        } else {
+          console.error('Payment info ainda não disponível após timeout');
+          loading.innerHTML = '<p style="color: #dc3545;">Erro: Não foi possível carregar o QR Code. Por favor, recarregue a página ou tente novamente.</p>';
+        }
+      }
+    }, 5000);
+  </script>
+</body>
+</html>
+

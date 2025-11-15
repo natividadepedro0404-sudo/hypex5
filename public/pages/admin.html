@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Painel Admin - HYPEX</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header class="site-header admin-header">
+    <div class="header-top">
+      <div class="logo"><a class="logo-link" href="/"><h1>HYPEX</h1></a></div>
+      <div class="search-bar"><input type="search" id="search-input" placeholder="Buscar..."><button id="search-button"><i class="fas fa-search"></i></button></div>
+      <nav class="user-nav">
+        <a href="/pages/auth.html" class="nav-link user-entry" id="user-entry"><i class="fas fa-user"></i> Entrar</a>
+        <a href="/pages/favorites.html" class="nav-link"><i class="fas fa-heart"></i> Favoritos</a>
+        <a href="#" class="nav-link cart-icon" id="cart-button"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span><span class="cart-label">Carrinho</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <h2>Painel Administrativo</h2>
+    <p>Ferramentas básicas para administrar o site. Certifique-se de estar logado como <strong>admin</strong>.</p>
+
+    <div class="admin-grid">
+      <nav class="admin-nav">
+        <a href="#orders" class="admin-nav-link active" data-section="orders"><i class="fas fa-box"></i> Pedidos</a>
+        <a href="#products" class="admin-nav-link" data-section="products"><i class="fas fa-tshirt"></i> Produtos</a>
+        <a href="#site-settings" class="admin-nav-link" data-section="site-settings"><i class="fas fa-cog"></i> Configurações do Site</a>
+        <a href="#users" class="admin-nav-link" data-section="users"><i class="fas fa-users"></i> Usuários</a>
+        <a href="#coupons" class="admin-nav-link" data-section="coupons"><i class="fas fa-ticket"></i> Cupons</a>
+      </nav>
+
+      <div class="admin-content">
+        <section id="orders" class="admin-section active">
+          <h3>Pedidos</h3>
+          <div id="orders-list" class="admin-list">Carregando pedidos...</div>
+        </section>
+
+        <section id="products" class="admin-section">
+          <div class="section-header">
+            <h3>Produtos</h3>
+            <button type="button" class="btn btn-primary" id="add-product">
+              <i class="fas fa-plus"></i> Novo Produto
+            </button>
+          </div>
+
+          <div id="products-list" class="admin-list">
+            <div class="products-grid"></div>
+          </div>
+
+          <div id="product-modal" class="admin-modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4>Adicionar/Editar Produto</h4>
+                <button class="close-modal">&times;</button>
+              </div>
+              <form id="product-form" class="admin-form">
+                <input type="hidden" name="id">
+                <div class="form-group">
+                  <label for="name">Nome do Produto</label>
+                  <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                  <label for="description">Descrição</label>
+                  <textarea id="description" name="description" rows="3" required></textarea>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="price">Preço (R$)</label>
+                    <input type="number" id="price" name="price" min="0" step="0.01" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="stock">Estoque</label>
+                    <input type="number" id="stock" name="stock" min="0" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Imagens do Produto</label>
+                  <small style="display: block; color: #666; margin-bottom: 0.5rem;">Você pode selecionar até 5 imagens (JPG, PNG, etc.)</small>
+                  <input type="file" name="images" multiple accept="image/*">
+                  <div class="image-preview"></div>
+                </div>
+                
+                <div class="form-group">
+                  <label>Especificações do Produto</label>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="brand">Marca</label>
+                      <select id="brand" name="brand" required>
+                        <option value="">Selecione a marca</option>
+                        <option value="lacoste">Lacoste</option>
+                        <option value="louis-vuitton">Louis Vuitton</option>
+                        <option value="nike">Nike</option>
+                        <option value="adidas">Adidas</option>
+                        <option value="emporio-armani">Emporio Armani</option>
+                        <option value="zara">Zara</option>
+                        <option value="chronic">Chronic</option>
+                        <option value="bmw">BMW</option>
+                        <option value="gucci">Gucci</option>
+                        <option value="prada">Prada</option>
+                        <option value="versace">Versace</option>
+                        <option value="dior">Dior</option>
+                        <option value="off-white">Off-White</option>
+                        <option value="fendi">Fendi</option>
+                        <option value="burberry">Burberry</option>
+                        <option value="givenchy">Givenchy</option>
+                        <option value="supreme">Supreme</option>
+                        <option value="puma">Puma</option>
+                        <option value="balenciaga">Balenciaga</option>
+                        <option value="tommy-hilfiger">Tommy Hilfiger</option>
+                        <option value="calvin-klein">Calvin Klein</option>
+                        <option value="dolce-gabbana">Dolce & Gabbana</option>
+                        <option value="jordan">Jordan</option>
+                        <option value="hermes">Hermès</option>
+                        <option value="diesel">Diesel</option>
+                        <option value="vans">Vans</option>
+                        <option value="new-balance">New Balance</option>
+                        <option value="under-armour">Under Armour</option>
+                        <option value="ralph-lauren">Ralph Lauren</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="type">Tipo</label>
+                      <select id="type" name="type" required>
+                        <option value="">Selecione o tipo</option>
+                        <option value="camisa">Camisa</option>
+                        <option value="moleton">Moleton</option>
+                        <option value="vestido">Vestido</option>
+                        <option value="sapato">Sapato</option>
+                        <option value="calca">Calça</option>
+                        <option value="short">Short</option>
+                        <option value="camiseta">Camiseta</option>
+                        <option value="calca-normal">Calça Normal</option>
+                        <option value="calca-jogador">Calça Jogador</option>
+                        <option value="bermuda-jeans">Bermuda Jeans</option>
+                        <option value="bermuda-jogador">Bermuda Jogador</option>
+                        <option value="bermuda-tectel">Bermuda Tectel</option>
+                        <option value="bermuda-elastano">Bermuda Elastano</option>
+                        <option value="blusa-times">Blusa de Times</option>
+                        <option value="conjunto">Conjunto</option>
+                        <option value="kit">Sugestões de Kit</option>
+                        <option value="bone">Boné</option>
+                        <option value="acessorio">Acessório</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="color">Cor</label>
+                      <input type="text" id="color" name="color" placeholder="Ex: Preto, Branco, Vermelho..." required>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>Tamanhos Disponíveis <span id="sizes-counter" style="color: #666; font-weight: normal;">(0/9 selecionados)</span></label>
+                    <div id="sizes-limit-message" style="display: none; padding: 0.5rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; margin-bottom: 0.5rem; color: #856404; font-size: 0.875rem;">
+                      <i class="fas fa-exclamation-triangle"></i> Limite de 9 tamanhos atingido. Desmarque um tamanho para selecionar outro.
+                    </div>
+                    <div class="checkbox-group" style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                      <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="sizes" value="PP" class="size-checkbox">
+                        <span>PP</span>
+                      </label>
+                      <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="sizes" value="P" class="size-checkbox">
+                        <span>P</span>
+                      </label>
+                      <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="sizes" value="M" class="size-checkbox">
+                        <span>M</span>
+                      </label>
+                      <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="sizes" value="G" class="size-checkbox">
+                        <span>G</span>
+                      </label>
+                      <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="sizes" value="GG" class="size-checkbox">
+                        <span>GG</span>
+                      </label>
+                      <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="sizes" value="XG" class="size-checkbox">
+                        <span>XG</span>
+                      </label>
+                      <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="sizes" value="G1" class="size-checkbox">
+                        <span>G1</span>
+                      </label>
+                      <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="sizes" value="G2" class="size-checkbox">
+                        <span>G2</span>
+                      </label>
+                      <label style="display: flex; align-items: center; gap: 0.5rem;">
+                        <input type="checkbox" name="sizes" value="G3" class="size-checkbox">
+                        <span>G3</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Product Variations Section -->
+                <div class="form-group" id="variations-section" style="border-top: 1px solid #ddd; padding-top: 1rem; margin-top: 1rem;">
+                  <label>Variações do Produto</label>
+                  <small style="display: block; color: #666; margin-bottom: 0.5rem;">
+                    Adicione variações como diferentes cores ou tamanhos com preços individuais
+                  </small>
+                  
+                  <div id="variations-container">
+                    <!-- Variations will be added here dynamically -->
+                  </div>
+                  
+                  <button type="button" id="add-variation" class="btn btn-outline" style="margin-top: 0.5rem;">
+                    <i class="fas fa-plus"></i> Adicionar Variação
+                  </button>
+                </div>
+                
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Salvar Produto</button>
+                  <button type="button" class="btn btn-outline close-modal">Cancelar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <section id="site-settings" class="admin-section">
+          <h3>Configurações do Site</h3>
+          <div id="site-settings-list" class="admin-list">
+            <p>Carregando configurações...</p>
+          </div>
+        </section>
+
+        <section id="users" class="admin-section">
+          <h3>Usuários</h3>
+          <div id="users-list" class="admin-list">(em breve)</div>
+        </section>
+
+        <section id="coupons" class="admin-section">
+          <h3>Cupons</h3>
+          <div id="coupons-list" class="admin-list">(em breve)</div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    .admin-main { max-width:1400px; margin:2rem auto; padding:0 1rem; }
+    .admin-grid { display:grid; grid-template-columns:220px 1fr; gap:2rem; margin-top:2rem; }
+    .admin-nav { background:#fff; padding:1rem; border-radius:8px; border:1px solid var(--gray-200); }
+    .admin-nav-link { display:flex; align-items:center; gap:.5rem; padding:.75rem 1rem; color:var(--text-primary); text-decoration:none; border-radius:6px; }
+    .admin-nav-link:hover { background:var(--gray-100); }
+    .admin-nav-link.active { background:var(--primary); color:var(--secondary); }
+    .admin-content { background:#fff; padding:2rem; border-radius:8px; border:1px solid var(--gray-200); }
+    .admin-section { display:none; }
+    .admin-section.active { display:block; }
+    .section-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
+    .admin-form .form-group { margin-bottom:1rem; }
+    .admin-form label { display:block; margin-bottom:.25rem; font-weight:500; }
+    .admin-form input[type=text],
+    .admin-form input[type=number],
+    .admin-form textarea { 
+      width:100%; 
+      padding:.5rem; 
+      /* Efeito acrílico */
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(224, 224, 224, 0.5);
+      border-radius: 6px;
+      color: var(--text-primary);
+      /* Fallback para navegadores que não suportam backdrop-filter */
+      @supports not (backdrop-filter: blur(5px)) {
+        background: rgba(255, 255, 255, 0.9);
+      }
+      isolation: isolate;
+      filter: none !important;
+      -webkit-filter: none !important;
+    }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .admin-modal { display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,.5);
+      align-items:center; justify-content:center; z-index:1000; overflow:auto; padding:1rem; }
+    .admin-modal .modal-content { background:#fff; padding:2rem; border-radius:8px; width:100%; max-width:600px; max-height:90vh; overflow-y:auto; }
+    .admin-modal .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
+    .admin-modal .close-modal { background:none; border:none; font-size:1.5rem; cursor:pointer; padding:0; }
+    .image-preview { display:grid; grid-template-columns:repeat(auto-fill,minmax(100px,1fr)); gap:.5rem; margin-top:.5rem; }
+    .image-preview img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:4px; }
+    .settings-form { display:flex; flex-direction:column; gap:2rem; }
+    .setting-item { padding:1.5rem; border:1px solid var(--gray-200); border-radius:8px; background:#fafafa; }
+    .setting-item label { display:block; margin-bottom:.75rem; }
+    .setting-item label strong { display:block; margin-bottom:.25rem; font-size:1rem; }
+    .setting-item label small { display:block; color:var(--text-secondary); font-size:0.875rem; }
+    .setting-item input[type=text] { 
+      width:100%; 
+      padding:.75rem; 
+      /* Efeito acrílico */
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(224, 224, 224, 0.5);
+      border-radius: 6px;
+      color: var(--text-primary);
+      margin-bottom:.75rem;
+      /* Fallback para navegadores que não suportam backdrop-filter */
+      @supports not (backdrop-filter: blur(5px)) {
+        background: rgba(255, 255, 255, 0.9);
+      }
+      isolation: isolate;
+      filter: none !important;
+      -webkit-filter: none !important;
+    }
+    .setting-item button { padding:.5rem 1.5rem; }
+    @media (max-width:768px) {
+      .admin-grid { grid-template-columns:1fr; }
+      .admin-nav { display:flex; overflow-x:auto; padding:.5rem; }
+      .form-row { grid-template-columns:1fr; }
+      .admin-modal .modal-content { max-height:95vh; }
+    }
+    
+    /* Status styles */
+    .status-active { color: #28a745; font-weight: bold; }
+    .status-inactive { color: #dc3545; font-weight: bold; }
+    
+    /* Button styles */
+    .btn-warning { 
+      /* Efeito acrílico */
+      background: rgba(255, 193, 7, 0.25);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(224, 224, 224, 0.5);
+      border-radius: 6px;
+      color: #212529;
+      /* Fallback para navegadores que não suportam backdrop-filter */
+      @supports not (backdrop-filter: blur(5px)) {
+        background: rgba(255, 193, 7, 0.9);
+      }
+      isolation: isolate;
+      filter: none !important;
+      -webkit-filter: none !important;
+    }
+    .btn-warning:hover { 
+      background-color: #e0a800; 
+      border-color: #d39e00; 
+    }
+    .btn-success { 
+      /* Efeito acrílico */
+      background: rgba(40, 167, 69, 0.25);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(224, 224, 224, 0.5);
+      border-radius: 6px;
+      color: #fff;
+      /* Fallback para navegadores que não suportam backdrop-filter */
+      @supports not (backdrop-filter: blur(5px)) {
+        background: rgba(40, 167, 69, 0.9);
+      }
+      isolation: isolate;
+      filter: none !important;
+      -webkit-filter: none !important;
+    }
+    .btn-success:hover { 
+      background-color: #218838; 
+      border-color: #1e7e34; 
+    }
+  </style>
+
+  <script src="/js/user.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

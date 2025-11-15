@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Perfil - HYPEX</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-top">
+  <div class="logo"><a class="logo-link" href="/"><h1>HYPEX</h1></a></div>
+      <div class="search-bar">
+        <input type="search" id="search-input" placeholder="Buscar produtos..." aria-label="Buscar produtos">
+        <button type="button" id="search-button"><i class="fas fa-search"></i></button>
+      </div>
+      <nav class="user-nav">
+        <a href="/pages/auth.html" class="nav-link user-entry" id="user-entry"><i class="fas fa-user"></i> Entrar</a>
+        <a href="/pages/favorites.html" class="nav-link"><i class="fas fa-heart"></i> Favoritos</a>
+        <a href="#" class="nav-link cart-icon" id="cart-button">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count">0</span>
+          <span class="cart-label">Carrinho</span>
+        </a>
+      </nav>
+    </div>
+    <nav class="categories-nav">
+      <ul>
+        <li><a href="/pages/novidades.html">NOVIDADES</a></li>
+        <li class="brands-dropdown">
+            <button class="brands-dropdown-btn">MARCAS <i class="fas fa-chevron-down"></i></button>
+            <div class="brands-dropdown-content">
+                <a href="#" data-brand="lacoste">Lacoste</a>
+                <a href="#" data-brand="louis-vuitton">Louis Vuitton</a>
+                <a href="#" data-brand="nike">Nike</a>
+                <a href="#" data-brand="adidas">Adidas</a>
+                <a href="#" data-brand="emporio-armani">Emporio Armani</a>
+                <a href="#" data-brand="zara">Zara</a>
+                <a href="#" data-brand="chronic">Chronic</a>
+                <a href="#" data-brand="bmw">BMW</a>
+                <a href="#" data-brand="gucci">Gucci</a>
+                <a href="#" data-brand="prada">Prada</a>
+                <a href="#" data-brand="versace">Versace</a>
+                <a href="#" data-brand="dior">Dior</a>
+                <a href="#" data-brand="off-white">Off-White</a>
+                <a href="#" data-brand="fendi">Fendi</a>
+                <a href="#" data-brand="burberry">Burberry</a>
+                <a href="#" data-brand="givenchy">Givenchy</a>
+                <a href="#" data-brand="supreme">Supreme</a>
+                <a href="#" data-brand="puma">Puma</a>
+                <a href="#" data-brand="balenciaga">Balenciaga</a>
+                <a href="#" data-brand="tommy-hilfiger">Tommy Hilfiger</a>
+                <a href="#" data-brand="calvin-klein">Calvin Klein</a>
+                <a href="#" data-brand="dolce-gabbana">Dolce & Gabbana</a>
+                <a href="#" data-brand="jordan">Jordan</a>
+                <a href="#" data-brand="hermes">Hermès</a>
+                <a href="#" data-brand="diesel">Diesel</a>
+                <a href="#" data-brand="vans">Vans</a>
+                <a href="#" data-brand="new-balance">New Balance</a>
+                <a href="#" data-brand="under-armour">Under Armour</a>
+                <a href="#" data-brand="ralph-lauren">Ralph Lauren</a>
+            </div>
+        </li>
+        <li><a href="/pages/ofertas.html">OFERTAS</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="profile-main">
+    <div class="profile-grid">
+      <aside class="profile-card">
+        <div class="profile-avatar">
+          <div class="avatar">H</div>
+        </div>
+        <div class="profile-details">
+          <h2 id="user-name">—</h2>
+          <p class="muted" id="user-email">—</p>
+        </div>
+
+        <hr>
+
+        <div class="form-actions">
+          <button type="button" id="logout-btn" class="btn btn-outline">Sair</button>
+        </div>
+      </aside>
+
+      <section class="orders-card">
+        <h2>Meus Pedidos</h2>
+        <div id="orders-list" class="orders-list">
+          <p class="muted">Carregando pedidos...</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="/js/user.js"></script>
+  <script src="/js/brands.js"></script>
+  <script src="/js/profile.js"></script>
+</body>
+</html>

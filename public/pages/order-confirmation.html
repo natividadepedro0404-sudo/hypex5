@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pedido Confirmado - HYPEX</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .confirmation-container {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .success-icon {
+      font-size: 4rem;
+      color: #28a745;
+      margin-bottom: 1rem;
+    }
+    
+    .confirmation-title {
+      font-size: 2rem;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+    
+    .confirmation-message {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    
+    .info-box {
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+    
+    .info-box h3 {
+      margin: 0 0 1rem 0;
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+    
+    .info-box p {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    
+    .whatsapp-button {
+      display: inline-block;
+      /* Efeito acrílico */
+      background: rgba(37, 211, 102, 0.25);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(224, 224, 224, 0.5);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin: 1rem 0;
+      transition: background 0.3s ease;
+      /* Fallback para navegadores que não suportam backdrop-filter */
+      @supports not (backdrop-filter: blur(5px)) {
+        background: rgba(37, 211, 102, 0.9);
+      }
+      isolation: isolate;
+      filter: none !important;
+      -webkit-filter: none !important;
+    }
+    
+    .whatsapp-button:hover {
+      background: #1fb855;
+      color: white;
+    }
+    
+    .whatsapp-button i {
+      margin-right: 0.5rem;
+    }
+    
+    .order-details {
+      background: white;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      text-align: left;
+    }
+    
+    .order-details h4 {
+      margin: 0 0 1rem 0;
+      color: var(--text-primary);
+    }
+    
+    .back-home {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      /* Efeito acrílico */
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(224, 224, 224, 0.5);
+      border-radius: 6px;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      /* Fallback para navegadores que não suportam backdrop-filter */
+      @supports not (backdrop-filter: blur(5px)) {
+        background: rgba(0, 0, 0, 0.9);
+      }
+      isolation: isolate;
+      filter: none !important;
+      -webkit-filter: none !important;
+    }
+    
+    .back-home:hover {
+      background: var(--primary-dark);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-top">
+      <div class="logo"><a class="logo-link" href="/"><h1>HYPEX</h1></a></div>
+      <div class="search-bar"><input type="search" id="search-input" placeholder="Buscar..."><button id="search-button"><i class="fas fa-search"></i></button></div>
+      <nav class="user-nav">
+        <a href="/pages/auth.html" class="nav-link user-entry" id="user-entry"><i class="fas fa-user"></i> Entrar</a>
+        <a href="/pages/favorites.html" class="nav-link"><i class="fas fa-heart"></i> Favoritos</a>
+        <a href="#" class="nav-link cart-icon" id="cart-button"><i class="fas fa-shopping-cart"></i><span class="cart-count">0</span><span class="cart-label">Carrinho</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="confirmation-container">
+    <div class="success-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    
+    <h1 class="confirmation-title">Pedido Feito!</h1>
+    
+    <p class="confirmation-message">
+      Seu pedido foi registrado com sucesso.
+    </p>
+    
+    <div id="delivery-info" class="info-box">
+      <!-- Conteúdo será preenchido via JavaScript -->
+    </div>
+    
+    <a href="https://wa.me/5531975074666" target="_blank" class="whatsapp-button">
+      <i class="fab fa-whatsapp"></i> Chamar no WhatsApp
+    </a>
+    
+    <div id="order-summary" class="order-details">
+      <!-- Resumo do pedido será preenchido via JavaScript -->
+    </div>
+    
+    <a href="/" class="back-home">
+      <i class="fas fa-home"></i> Voltar para Home
+    </a>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Atendimento</h4>
+        <ul>
+          <li><a href="/pages/faq.html">FAQ</a></li>
+          <li><a href="/pages/contato.html">Contato</a></li>
+          <li><a href="/pages/envio.html">Envio</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Sobre</h4>
+        <ul>
+          <li><a href="/pages/sobre.html">Quem Somos</a></li>
+          <li><a href="/pages/termos.html">Termos</a></li>
+          <li><a href="/pages/privacidade.html">Privacidade</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Redes Sociais</h4>
+        <div class="social-links">
+          <a href="https://www.instagram.com/hypex.ytt?igsh=Ym1mcjZoYmZyajJh&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@hypex.ytt?_r=1&_t=ZS-91JuQbM4gsi" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 HYPEX. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="/js/user.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Obter parâmetros da URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const deliveryType = urlParams.get('type');
+      
+      // Obter dados do pedido do localStorage
+      const orderData = JSON.parse(localStorage.getItem('hypex_order_confirmation') || '{}');
+      
+      // Preencher informações de entrega
+      const deliveryInfoEl = document.getElementById('delivery-info');
+      
+      if (deliveryType === 'pickup') {
+        deliveryInfoEl.innerHTML = `
+          <h3><i class="fas fa-store"></i> Retirada no Local</h3>
+          <p>🛍️ Retire seu pedido pessoalmente no endereço abaixo:</p>
+          <p><strong>📍 Rua Camboja, nº 133 – Bairro Petrovale, Betim</strong></p>
+          <p>📞 Telefone: <strong>(31) 97507-4666</strong></p>
+          <p style="margin-top: 1rem; color: #666;">Entre em contato pelo WhatsApp para combinar o horário da retirada.</p>
+        `;
+      } else if (deliveryType === 'moto-uber') {
+        deliveryInfoEl.innerHTML = `
+          <h3><i class="fas fa-motorcycle"></i> Entrega via Moto/Uber</h3>
+          <p>📦 Entregamos por moto-Uber, com o valor a combinar diretamente pelo WhatsApp.</p>
+          <p>📲 Contato: <strong>(31) 97507-4666</strong></p>
+          <p style="margin-top: 1rem; color: #666;">Chame no WhatsApp para combinar o valor e o horário da entrega.</p>
+        `;
+      }
+      
+      // Preencher resumo do pedido se disponível
+      const orderSummaryEl = document.getElementById('order-summary');
+      if (orderData.order_summary) {
+        const summary = orderData.order_summary;
+        orderSummaryEl.innerHTML = `
+          <h4>Resumo do Pedido</h4>
+          <p><strong>ID do Pedido:</strong> ${orderData.pending_order_id ? orderData.pending_order_id.substring(0, 8) : 'N/A'}...</p>
+          <p><strong>Total Pago:</strong> R$ ${Number(summary.total || 0).toFixed(2)}</p>
+          <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+            Você receberá atualizações sobre seu pedido via WhatsApp.
+          </p>
+        `;
+      }
+      
+      // Limpar dados do localStorage após exibir
+      setTimeout(() => {
+        localStorage.removeItem('hypex_order_confirmation');
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
