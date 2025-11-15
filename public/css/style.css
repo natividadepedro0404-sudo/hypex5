@@ -33,6 +33,21 @@ body {
   -webkit-filter: none !important;
 }
 
+/* Melhorias para responsividade geral */
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Ajustes no container principal */
+main {
+  min-height: calc(100vh - 200px); /* Ajusta a altura mínima considerando header e footer */
+  padding: 1rem;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /* Announcement Bar */
 .announcement-bar {
   /* Efeito acrílico */
@@ -410,24 +425,21 @@ body {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 0 2rem;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem 4rem;
-  /* Efeito acrílico */
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border-radius: 10px;
-  padding: 1rem;
-  /* Fallback para navegadores que não suportam backdrop-filter */
-  @supports not (backdrop-filter: blur(5px)) {
-    background: rgba(255, 255, 255, 0.9);
-  }
-  isolation: isolate;
-  filter: none !important;
-  -webkit-filter: none !important;
+}
+
+/* Ajustes no grid de produtos para melhor responsividade */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 0 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .product-card {
@@ -679,6 +691,31 @@ body {
   border-radius: 8px;
 }
 
+/* Ajustes no modal para melhor responsividade */
+.modal {
+  display: none;
+  position: fixed;
+  top: 15%;
+  right: 0;
+  bottom: 15%;
+  width: 400px;
+  /* Efeito acrílico */
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+  z-index: 1001;
+  /* Fallback para navegadores que não suportam backdrop-filter */
+  @supports not (backdrop-filter: blur(10px)) {
+    background: rgba(255, 255, 255, 0.9);
+  }
+  isolation: isolate;
+  filter: none !important;
+  -webkit-filter: none !important;
+  border-left: 1px solid rgba(224, 224, 224, 0.5);
+  border-radius: 8px;
+}
+
 .modal-content {
   height: 100%;
   display: flex;
@@ -694,7 +731,6 @@ body {
   isolation: isolate;
   filter: none !important;
   -webkit-filter: none !important;
-  border-radius: 8px;
 }
 
 .modal-header {
@@ -952,6 +988,38 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+  .header-top {
+    padding: 1rem 1.5rem;
+  }
+  
+  .search-bar {
+    flex: 0 1 400px;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.25rem;
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .header-top {
+    padding: 1rem;
+  }
+  
+  .search-bar {
+    flex: 0 1 300px;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .header-top {
     flex-wrap: wrap;
@@ -1018,6 +1086,9 @@ body {
   
   .modal {
     width: 100%;
+    top: 0;
+    bottom: 0;
+    border-radius: 0;
   }
   
   .site-footer {
@@ -1029,7 +1100,13 @@ body {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+    padding: 0 0.5rem;
+  }
+  
   .header-top {
     padding: 0.5rem;
   }
@@ -1194,6 +1271,18 @@ body {
   .admin-modal .modal-content {
     width: 95%;
     max-height: 90vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.5rem;
+    padding: 0 0.25rem;
+  }
+  
+  main {
+    padding: 0.5rem;
   }
 }
 
@@ -1990,44 +2079,17 @@ textarea:focus {
 }
 
 @media (max-width: 768px) {
-  .admin-main {
-    margin: 1rem auto;
-    padding: 0 0.5rem;
+  .modal {
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    border-radius: 0;
   }
-  
-  .admin-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .admin-nav {
-    padding: 0.75rem;
-  }
-  
-  .admin-nav a {
-    padding: 0.75rem;
-  }
-  
-  .admin-content {
+}
+
+@media (max-width: 576px) {
+  .modal {
     padding: 1rem;
-  }
-  
-  .admin-modal {
-    padding: 1rem;
-  }
-  
-  .admin-form {
-    padding: 1rem;
-  }
-  
-  .form-row {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .admin-modal .modal-content {
-    width: 95%;
-    max-height: 90vh;
   }
 }
 
