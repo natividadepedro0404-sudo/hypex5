@@ -1052,6 +1052,12 @@ main {
     padding: 0 1rem;
   }
   
+  /* Admin products grid - maintain 3 columns on medium screens */
+  .admin-list .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  
   /* Manter efeito acrílico em dispositivos móveis */
   .product-card {
     backdrop-filter: blur(5px);
@@ -1161,6 +1167,12 @@ main {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 0.75rem;
     padding: 0 0.5rem;
+  }
+  
+  /* Admin products grid - adjust for small screens */
+  .admin-list .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
   }
   
   /* Manter efeito acrílico em dispositivos móveis pequenos */
@@ -1281,6 +1293,12 @@ main {
     padding: 0 0.25rem;
   }
   
+  /* Admin products grid - single column on very small screens */
+  .admin-list .products-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
   main {
     padding: 0.5rem;
   }
@@ -1355,7 +1373,7 @@ textarea:focus {
 
 .admin-list .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin-top: 1rem;
 }
